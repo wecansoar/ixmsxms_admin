@@ -1,0 +1,42 @@
+<div id="addModal" data-backdrop="static" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="storyModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="storyModalLabel">GrowthChildMap</h3>
+    </div>
+    <div class="modal-body">
+        <form id="addForm" onsubmit="return false;" class="bs-docs-example form-horizontal">
+        <input type="hidden" id="addForm_id" name="id" value="$!{coreUtil.escapeHtml($item.id)}">
+        <div class="control-group">
+            <label class="control-label required"></label>
+            <div class="controls ">
+                <input type="text" id="addForm_growthId" name="growthId" placeholder="growthId" value="$!{coreUtil.escapeHtml($item.growthId)}">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label required"></label>
+            <div class="controls ">
+                <input type="text" id="addForm_childId" name="childId" placeholder="childId" value="$!{coreUtil.escapeHtml($item.childId)}">
+            </div>
+        </div>
+
+      #if($item)
+        <div class="control-group">
+            <label class="control-label">등록일시</label>
+            <div class="controls">
+                <div class="control-text">$!{coreUtil.getFormat($item.regDatetime)}</div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">수정일시</label>
+            <div class="controls">
+                <div class="control-text">$!{coreUtil.getFormat($item.modDatetime)}</div>
+            </div>
+        </div>
+      #end
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-small" id="saveButton">저장</button>
+        <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">닫기</button>
+    </div>
+</div>

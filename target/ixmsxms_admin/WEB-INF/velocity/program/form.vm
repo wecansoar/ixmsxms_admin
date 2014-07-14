@@ -1,0 +1,28 @@
+<div id="addModal" data-backdrop="static" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="storyModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="storyModalLabel">Program</h3>
+    </div>
+    <div class="modal-body">
+        <form id="addForm" onsubmit="return false;" class="bs-docs-example form-horizontal">
+        <input type="hidden" id="addForm_id" name="id" value="$!{coreUtil.escapeHtml($item.id)}">
+        <div class="control-group">
+            <label class="control-label required">프로그램명</label>
+            <div class="controls ">
+                <input type="text" id="addForm_program" name="program" placeholder="program" value="$!{coreUtil.escapeHtml($item.program)}">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label required">만든 사람들</label>
+            <div class="controls ">
+                <input type="text" id="addForm_maker" name="maker" placeholder="maker" value="$!{coreUtil.escapeHtml($item.maker)}">
+            </div>
+        </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-small" id="saveButton">저장</button>
+        <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">닫기</button>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.flower.ixmsxms_admin.dao.ChildDao">
+    <select id="select"
+        parameterType="Long"
+        resultType="net.flower.ixmsxms_admin.domain.Child">
+      select
+        c.*, u.name 'user_name'
+        from child c, user u
+       where 1 = 1
+         and c.child_id = #{childId}
+         and c.user_id = u.user_id
+    </select>
+
+    <sql id="fromAndWhere">
+        from child
+        where 1 = 1
+    </sql>
+
+    <select id="selectList"
+        parameterType="net.flower.ixmsxms_admin.domain.Child"
+        resultType="net.flower.ixmsxms_admin.domain.Child">
+        select
+        c.*, u.name 'user_name'
+        from child c, user u
+        where 1 = 1
+          and c.user_id = u.user_id
+         <if test='userId!=null'>
+          and u.user_id = #{userId}
+         </if>
+        order by c.child_id desc
+        limit #{start}, #{count}
+    </select>
+
+    <select id="selectAllList"
+        parameterType="net.flower.ixmsxms_admin.domain.Child"
+        resultType="net.flower.ixmsxms_admin.domain.Child">
+        select
+        *
+        <include refid="fromAndWhere"/>
+        order by child_id desc
+        limit 1000
+    </select>
+
+    <select id="selectListCount"
+        parameterType="net.flower.ixmsxms_admin.domain.Child"
+        resultType="java.lang.Integer">
+        select
+        count(*)
+        <include refid="fromAndWhere"/>
+    </select>
+
+    <insert id="insert"
+        parameterType="net.flower.ixmsxms_admin.domain.Child">
+        insert into child
+        (
+              user_id
+            , name
+            , sex
+            , birthdayDate
+            , image_url
+            , reg_datetime
+            , mod_datetime
+            , status
+        )
+        values
+        (
+              #{userId}
+            , #{name}
+            , #{sex}
+            , #{birthdaydate}
+            , #{imageUrl}
+            , sysdate()
+            , sysdate()
+            , #{status}
+        )
+
+        <selectKey keyProperty="childId" resultType="Long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="update"
+        parameterType="net.flower.ixmsxms_admin.domain.Child">
+        update child
+        set
+          user_id = #{userId}
+        , name = #{name}
+        , sex = #{sex}
+        , birthdayDate = #{birthdaydate}
+        , image_url = #{imageUrl}
+        , mod_datetime = sysdate()
+        , status = #{status}
+        where 1 = 1
+        and child_id = #{childId}
+    </update>
+
+    <delete id="delete"
+        parameterType="Long">
+        delete from child
+        where 1 = 1
+        and child_id = #{childId}
+    </delete>
+</mapper>

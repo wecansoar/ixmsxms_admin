@@ -1,0 +1,49 @@
+<div id="addModal" data-backdrop="static" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="storyModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="storyModalLabel">Notice</h3>
+    </div>
+    <div class="modal-body">
+        <form id="addForm" onsubmit="return false;" class="bs-docs-example form-horizontal">
+        <input type="hidden" id="addForm_noticeId" name="noticeId" value="$!{coreUtil.escapeHtml($item.noticeId)}">
+        <div class="control-group">
+            <label class="control-label "></label>
+            <div class="controls ">
+                <input type="text" id="addForm_title" name="title" placeholder="title" value="$!{coreUtil.escapeHtml($item.title)}">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label "></label>
+            <div class="controls ">
+                <!-- tinymce="true" class="notCheckTag" -->
+                <textarea id="addForm_content" name="content" style="width:400px;height:300px">$!{coreUtil.escapeHtml($item.content)}</textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label "></label>
+            <div class="controls ">
+                <input type="text" id="addForm_status" name="status" placeholder="status" value="$!{coreUtil.escapeHtml($item.status)}">
+            </div>
+        </div>
+
+      #if($item)
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <div class="control-text">$!{coreUtil.getFormat($item.regDatetime)}</div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <div class="control-text">$!{coreUtil.getFormat($item.modDatetime)}</div>
+            </div>
+        </div>
+      #end
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-small" id="saveButton">저장</button>
+        <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">닫기</button>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+#parse("/includes/config.vm")
+<div>
+    #printToolbar('ContentCountLog')
+    <a href="javascript: showForm('/contentCountLog/form')" class="btn btn-small">추가</a>
+    <a href="javascript: deleteCheckedItem()" class="btn btn-small">삭제</a>
+    <div style="height:10px"></div>
+    <table class="table table-hover table-condensed">
+    <thead>
+        <tr>
+            <th><input type="checkbox" id="itemCheckbox" onclick="javascript: toggleSelectedItems()"></th>
+            <th>id</th>
+            <th>컨텐츠유형</th>
+            <th>컨텐츠번호</th>
+            <th>카운트유형</th>
+            <th>출처</th>
+            <th>daum userid</th>
+            <th>user ip</th>
+            <th>등록일시</th>
+            <th>수정일시</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+#foreach($item in $list)
+    <tr>
+        <td><input type="checkbox" name="itemCheckbox" class="itemCheckbox" value="$!{coreUtil.escapeHtml($item.logId)}"></td>
+        <td class="nowrap-text">$!{coreUtil.escapeHtml($item.logId)}</td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.objectType)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.objectId)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.countType)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.countSource)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.userId)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.ip)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.getFormat($item.regDatetime)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.getFormat($item.modDatetime)}
+        </td>
+        <td class="nowrap-text">
+            <a class="btn btn-small" href="javascript: showForm('/contentCountLog/form', {id:$item.logId, logId:$item.logId})">수정</a>
+            <a class="btn btn-small" href="javascript: deleteItem($!{coreUtil.escapeHtml($item.logId)})">삭제</a>
+        </td>
+    </tr>
+#end
+</table>
+</div>
+#printPaginate($page)

@@ -1,0 +1,43 @@
+#parse("/includes/config.vm")
+<div>
+    #printToolbar('Version')
+    <a href="javascript: showForm('/version/form')" class="btn btn-small">추가</a>
+    <a href="javascript: deleteCheckedItem()" class="btn btn-small">삭제</a>
+    <div style="height:10px"></div>
+    <table class="table table-hover table-condensed">
+    <thead>
+        <tr>
+            <th><input type="checkbox" id="itemCheckbox" onclick="javascript: toggleSelectedItems()"></th>
+            <th>id</th>
+            <th>?? ??</th>
+            <th>?? ? ??</th>
+            <th>????</th>
+            <th>????</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+#foreach($item in $list)
+    <tr>
+        <td><input type="checkbox" name="itemCheckbox" class="itemCheckbox" value="$!{coreUtil.escapeHtml($item.versionId)}"></td>
+        <td class="nowrap-text">$!{coreUtil.escapeHtml($item.versionId)}</td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.version)}
+        </td>
+        <td class="nowrap-text">
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.getFormat($item.regDatetime)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.getFormat($item.modDatetime)}
+        </td>
+        <td class="nowrap-text">
+            <a class="btn btn-small" href="javascript: showForm('/version/form', {id:$item.versionId, versionId:$item.versionId})">수정</a>
+            <a class="btn btn-small" href="javascript: deleteItem($!{coreUtil.escapeHtml($item.versionId)})">삭제</a>
+        </td>
+    </tr>
+#end
+</table>
+</div>
+#printPaginate($page)

@@ -1,0 +1,56 @@
+#parse("/includes/config.vm")
+<div>
+    #printToolbar('CodeGroup')
+    <a href="javascript: showForm('/codeGroup/form')" class="btn btn-small">추가</a>
+    <a href="javascript: deleteCheckedItem()" class="btn btn-small">삭제</a>
+    <div style="height:10px"></div>
+    <table class="table table-hover table-condensed">
+    <thead>
+        <tr>
+            <th><input type="checkbox" id="itemCheckbox" onclick="javascript: toggleSelectedItems()"></th>
+            <th>id</th>
+            <th>그룹 코드</th>
+            <th>그룹 이름</th>
+            <th>상태</th>
+            <th>설명</th>
+            <th>전시순서</th>
+            <th>등록일시</th>
+            <th>수정일시</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+#foreach($item in $list)
+    <tr>
+        <td><input type="checkbox" name="itemCheckbox" class="itemCheckbox" value="$!{coreUtil.escapeHtml($item.groupId)}"></td>
+        <td class="nowrap-text">$!{coreUtil.escapeHtml($item.groupId)}</td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.groupCode)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.groupName)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.status)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.description)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.dispOrder)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.getFormat($item.regDatetime)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.getFormat($item.modDatetime)}
+        </td>
+        <td class="nowrap-text">
+            <a class="btn btn-small" href="javascript: showForm('/codeGroup/form', {id:$item.groupId, groupId:$item.groupId})">수정</a>
+            <a class="btn btn-small" href="javascript: deleteItem($!{coreUtil.escapeHtml($item.groupId)})">삭제</a>
+        </td>
+    </tr>
+#end
+</table>
+</div>
+#printPaginate($page)

@@ -1,0 +1,48 @@
+#parse("/includes/config.vm")
+<div>
+    #printToolbar('GrowthItems')
+    <a href="javascript: showForm('/growthItems/form')" class="btn btn-small">추가</a>
+    <a href="javascript: deleteCheckedItem()" class="btn btn-small">삭제</a>
+    <div style="height:10px"></div>
+    <table class="table table-hover table-condensed">
+    <thead>
+        <tr>
+            <th><input type="checkbox" id="itemCheckbox" onclick="javascript: toggleSelectedItems()"></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+#foreach($item in $list)
+    <tr>
+        <td><input type="checkbox" name="itemCheckbox" class="itemCheckbox" value="$!{coreUtil.escapeHtml($item.itemId)}"></td>
+        <td class="nowrap-text">$!{coreUtil.escapeHtml($item.itemId)}</td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.growthId)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.imageUrl)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.progressId)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.getFormat($item.regDatetime)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.getFormat($item.modDatetime)}
+        </td>
+        <td class="nowrap-text">
+            <a class="btn btn-small" href="javascript: showForm('/growthItems/form', {id:$item.itemId, itemId:$item.itemId})">수정</a>
+            <a class="btn btn-small" href="javascript: deleteItem($!{coreUtil.escapeHtml($item.itemId)})">삭제</a>
+        </td>
+    </tr>
+#end
+</table>
+</div>
+#printPaginate($page)

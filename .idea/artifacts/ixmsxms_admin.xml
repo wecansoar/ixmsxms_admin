@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ixmsxms_admin">
+    <output-path>$PROJECT_DIR$/out/artifacts/ixmsxms_admin</output-path>
+    <root id="archive" name="ixmsxms_admin.war" />
+  </artifact>
+</component>

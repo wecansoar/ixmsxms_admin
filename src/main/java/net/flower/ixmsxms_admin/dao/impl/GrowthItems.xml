@@ -1,0 +1,91 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.flower.ixmsxms_admin.dao.GrowthItemsDao">
+    <select id="select"
+        parameterType="Long"
+        resultType="net.flower.ixmsxms_admin.domain.GrowthItems">
+        select
+        *
+        from growth_items
+        where 1 = 1
+        and item_id = #{itemId}
+    </select>
+
+    <sql id="fromAndWhere">
+        from growth_items
+        where 1 = 1
+    </sql>
+
+    <select id="selectList"
+        parameterType="net.flower.ixmsxms_admin.domain.GrowthItems"
+        resultType="net.flower.ixmsxms_admin.domain.GrowthItems">
+        select
+        *
+        <include refid="fromAndWhere"/>
+        order by item_id desc
+        limit #{start}, #{count}
+    </select>
+
+    <select id="selectAllList"
+        parameterType="net.flower.ixmsxms_admin.domain.GrowthItems"
+        resultType="net.flower.ixmsxms_admin.domain.GrowthItems">
+        select
+        *
+        <include refid="fromAndWhere"/>
+        order by item_id desc
+        limit 1000
+    </select>
+
+    <select id="selectListCount"
+        parameterType="net.flower.ixmsxms_admin.domain.GrowthItems"
+        resultType="java.lang.Integer">
+        select
+        count(*)
+        <include refid="fromAndWhere"/>
+    </select>
+
+    <insert id="insert"
+        parameterType="net.flower.ixmsxms_admin.domain.GrowthItems">
+        insert into growth_items
+        (
+              growth_id
+            , image_url
+            , progress_id
+            , reg_datetime
+            , mod_datetime
+        )
+        values
+        (
+              #{growthId}
+            , #{imageUrl}
+            , #{progressId}
+            , sysdate()
+            , sysdate()
+        )
+
+        <selectKey keyProperty="itemId" resultType="Long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="update"
+        parameterType="net.flower.ixmsxms_admin.domain.GrowthItems">
+        update growth_items
+        set
+          growth_id = #{growthId}
+        , image_url = #{imageUrl}
+        , progress_id = #{progressId}
+        , mod_datetime = sysdate()
+        where 1 = 1
+        and item_id = #{itemId}
+    </update>
+
+    <delete id="delete"
+        parameterType="Long">
+        delete from growth_items
+        where 1 = 1
+        and item_id = #{itemId}
+    </delete>
+</mapper>

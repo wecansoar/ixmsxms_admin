@@ -1,0 +1,61 @@
+#parse("/includes/config.vm")
+<div>
+    #printToolbar('Child')
+    <a href="javascript: showForm('/child/form')" class="btn btn-small">추가</a>
+    <a href="javascript: deleteCheckedItem()" class="btn btn-small">삭제</a>
+    <div style="height:10px"></div>
+    <table class="table table-hover table-condensed">
+    <thead>
+        <tr>
+            <th><input type="checkbox" id="itemCheckbox" onclick="javascript: toggleSelectedItems()"></th>
+            <th>아이디</th>
+            <th>아이이름</th>
+            <th>부모</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+#foreach($item in $list)
+    <tr>
+        <td><input type="checkbox" name="itemCheckbox" class="itemCheckbox" value="$!{coreUtil.escapeHtml($item.childId)}"></td>
+        <td class="nowrap-text">$!{coreUtil.escapeHtml($item.childId)}</td>
+        <td class="nowrap-text">
+            $!{coreUtil.escapeHtml($item.name)}
+
+        </td>
+        <td class="nowrap-text">
+            $!{coreUtil.escapeHtml($item.userName)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.sex)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.birthdaydate)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.imageUrl)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.getFormat($item.regDatetime)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.getFormat($item.modDatetime)}
+        </td>
+        <td class="nowrap-text">
+        $!{coreUtil.escapeHtml($item.status)}
+        </td>
+        <td class="nowrap-text">
+            <a class="btn btn-small" href="javascript: showForm('/child/form', {id:$item.childId, childId:$item.childId})">수정</a>
+            <a class="btn btn-small" href="javascript: deleteItem($!{coreUtil.escapeHtml($item.childId)})">삭제</a>
+        </td>
+    </tr>
+#end
+</table>
+</div>
+#printPaginate($page)

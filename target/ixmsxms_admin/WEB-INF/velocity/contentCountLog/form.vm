@@ -1,0 +1,66 @@
+<div id="addModal" data-backdrop="static" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="storyModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="storyModalLabel">ContentCountLog</h3>
+    </div>
+    <div class="modal-body">
+        <form id="addForm" onsubmit="return false;" class="bs-docs-example form-horizontal">
+        <input type="hidden" id="addForm_logId" name="logId" value="$!{coreUtil.escapeHtml($item.logId)}">
+        <div class="control-group">
+            <label class="control-label required">컨텐츠유형</label>
+            <div class="controls ">
+                <input type="text" id="addForm_objectType" name="objectType" placeholder="objectType" value="$!{coreUtil.escapeHtml($item.objectType)}">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label required">컨텐츠번호</label>
+            <div class="controls ">
+                <input type="text" id="addForm_objectId" name="objectId" placeholder="objectId" value="$!{coreUtil.escapeHtml($item.objectId)}">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label ">카운트유형</label>
+            <div class="controls ">
+                <input type="text" id="addForm_countType" name="countType" placeholder="countType" value="$!{coreUtil.escapeHtml($item.countType)}">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label required">출처</label>
+            <div class="controls ">
+                <input type="text" id="addForm_countSource" name="countSource" placeholder="countSource" value="$!{coreUtil.escapeHtml($item.countSource)}">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label ">daum userid</label>
+            <div class="controls ">
+                <input type="text" id="addForm_userId" name="userId" placeholder="userId" value="$!{coreUtil.escapeHtml($item.userId)}">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label ">user ip</label>
+            <div class="controls ">
+                <input type="text" id="addForm_ip" name="ip" placeholder="ip" value="$!{coreUtil.escapeHtml($item.ip)}">
+            </div>
+        </div>
+
+      #if($item)
+        <div class="control-group">
+            <label class="control-label">등록일시</label>
+            <div class="controls">
+                <div class="control-text">$!{coreUtil.getFormat($item.regDatetime)}</div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">수정일시</label>
+            <div class="controls">
+                <div class="control-text">$!{coreUtil.getFormat($item.modDatetime)}</div>
+            </div>
+        </div>
+      #end
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-small" id="saveButton">저장</button>
+        <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">닫기</button>
+    </div>
+</div>

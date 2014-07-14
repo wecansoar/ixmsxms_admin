@@ -1,0 +1,97 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.flower.ixmsxms_admin.dao.GrowthDao">
+    <select id="select"
+        parameterType="Long"
+        resultType="net.flower.ixmsxms_admin.domain.Growth">
+        select
+        *
+        from growth
+        where 1 = 1
+        and growth_id = #{growthId}
+    </select>
+
+    <sql id="fromAndWhere">
+        from growth
+        where 1 = 1
+    </sql>
+
+    <select id="selectList"
+        parameterType="net.flower.ixmsxms_admin.domain.Growth"
+        resultType="net.flower.ixmsxms_admin.domain.Growth">
+        select
+        *
+        <include refid="fromAndWhere"/>
+        order by growth_id desc
+        limit #{start}, #{count}
+    </select>
+
+    <select id="selectAllList"
+        parameterType="net.flower.ixmsxms_admin.domain.Growth"
+        resultType="net.flower.ixmsxms_admin.domain.Growth">
+        select
+        *
+        <include refid="fromAndWhere"/>
+        order by growth_id desc
+        limit 1000
+    </select>
+
+    <select id="selectListCount"
+        parameterType="net.flower.ixmsxms_admin.domain.Growth"
+        resultType="java.lang.Integer">
+        select
+        count(*)
+        <include refid="fromAndWhere"/>
+    </select>
+
+    <insert id="insert"
+        parameterType="net.flower.ixmsxms_admin.domain.Growth">
+        insert into growth
+        (
+              child_id
+            , grow_date
+            , height
+            , weight
+            , note
+            , reg_datetime
+            , mod_datetime
+        )
+        values
+        (
+              #{childId}
+            , #{growDate}
+            , #{height}
+            , #{weight}
+            , #{note}
+            , sysdate()
+            , sysdate()
+        )
+
+        <selectKey keyProperty="growthId" resultType="Long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="update"
+        parameterType="net.flower.ixmsxms_admin.domain.Growth">
+        update growth
+        set
+          child_id = #{childId}
+        , grow_date = #{growDate}
+        , height = #{height}
+        , weight = #{weight}
+        , note = #{note}
+        , mod_datetime = sysdate()
+        where 1 = 1
+        and growth_id = #{growthId}
+    </update>
+
+    <delete id="delete"
+        parameterType="Long">
+        delete from growth
+        where 1 = 1
+        and growth_id = #{growthId}
+    </delete>
+</mapper>

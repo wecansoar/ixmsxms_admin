@@ -1,0 +1,94 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.flower.ixmsxms_admin.dao.ContentCountDao">
+    <select id="select"
+        parameterType="Long"
+        resultType="net.flower.ixmsxms_admin.domain.ContentCount">
+        select
+        *
+        from content_count
+        where 1 = 1
+        and count_id = #{countId}
+    </select>
+
+    <sql id="fromAndWhere">
+        from content_count
+        where 1 = 1
+    </sql>
+
+    <select id="selectList"
+        parameterType="net.flower.ixmsxms_admin.domain.ContentCount"
+        resultType="net.flower.ixmsxms_admin.domain.ContentCount">
+        select
+        *
+        <include refid="fromAndWhere"/>
+        order by count_id desc
+        limit #{start}, #{count}
+    </select>
+
+    <select id="selectAllList"
+        parameterType="net.flower.ixmsxms_admin.domain.ContentCount"
+        resultType="net.flower.ixmsxms_admin.domain.ContentCount">
+        select
+        *
+        <include refid="fromAndWhere"/>
+        order by count_id desc
+        limit 1000
+    </select>
+
+    <select id="selectListCount"
+        parameterType="net.flower.ixmsxms_admin.domain.ContentCount"
+        resultType="java.lang.Integer">
+        select
+        count(*)
+        <include refid="fromAndWhere"/>
+    </select>
+
+    <insert id="insert"
+        parameterType="net.flower.ixmsxms_admin.domain.ContentCount">
+        insert into content_count
+        (
+              object_type
+            , object_id
+            , count_type
+            , content_count
+            , reg_datetime
+            , mod_datetime
+        )
+        values
+        (
+              #{objectType}
+            , #{objectId}
+            , #{countType}
+            , #{contentCount}
+            , sysdate()
+            , sysdate()
+        )
+
+        <selectKey keyProperty="countId" resultType="Long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="update"
+        parameterType="net.flower.ixmsxms_admin.domain.ContentCount">
+        update content_count
+        set
+          object_type = #{objectType}
+        , object_id = #{objectId}
+        , count_type = #{countType}
+        , content_count = #{contentCount}
+        , mod_datetime = sysdate()
+        where 1 = 1
+        and count_id = #{countId}
+    </update>
+
+    <delete id="delete"
+        parameterType="Long">
+        delete from content_count
+        where 1 = 1
+        and count_id = #{countId}
+    </delete>
+</mapper>

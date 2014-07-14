@@ -1,0 +1,91 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.flower.ixmsxms_admin.dao.NoticeDao">
+    <select id="select"
+        parameterType="Long"
+        resultType="net.flower.ixmsxms_admin.domain.Notice">
+        select
+        *
+        from notice
+        where 1 = 1
+        and notice_id = #{noticeId}
+    </select>
+
+    <sql id="fromAndWhere">
+        from notice
+        where 1 = 1
+    </sql>
+
+    <select id="selectList"
+        parameterType="net.flower.ixmsxms_admin.domain.Notice"
+        resultType="net.flower.ixmsxms_admin.domain.Notice">
+        select
+        *
+        <include refid="fromAndWhere"/>
+        order by notice_id desc
+        limit #{start}, #{count}
+    </select>
+
+    <select id="selectAllList"
+        parameterType="net.flower.ixmsxms_admin.domain.Notice"
+        resultType="net.flower.ixmsxms_admin.domain.Notice">
+        select
+        *
+        <include refid="fromAndWhere"/>
+        order by notice_id desc
+        limit 1000
+    </select>
+
+    <select id="selectListCount"
+        parameterType="net.flower.ixmsxms_admin.domain.Notice"
+        resultType="java.lang.Integer">
+        select
+        count(*)
+        <include refid="fromAndWhere"/>
+    </select>
+
+    <insert id="insert"
+        parameterType="net.flower.ixmsxms_admin.domain.Notice">
+        insert into notice
+        (
+              title
+            , content
+            , status
+            , reg_datetime
+            , mod_datetime
+        )
+        values
+        (
+              #{title}
+            , #{content}
+            , #{status}
+            , sysdate()
+            , sysdate()
+        )
+
+        <selectKey keyProperty="noticeId" resultType="Long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="update"
+        parameterType="net.flower.ixmsxms_admin.domain.Notice">
+        update notice
+        set
+          title = #{title}
+        , content = #{content}
+        , status = #{status}
+        , mod_datetime = sysdate()
+        where 1 = 1
+        and notice_id = #{noticeId}
+    </update>
+
+    <delete id="delete"
+        parameterType="Long">
+        delete from notice
+        where 1 = 1
+        and notice_id = #{noticeId}
+    </delete>
+</mapper>
