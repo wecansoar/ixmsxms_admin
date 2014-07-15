@@ -5,14 +5,30 @@ import java.util.Date;
 public class Child extends BaseObject {
 
     private Long childId;
-    private String userId;
+    private Long userId;
     private String name;
     private String sex;
-    private String birthdaydate;
+    private String birthdayDate;
     private String imageUrl;
     private Date regDatetime;
     private Date modDatetime;
     private String status;
+
+    public String getBirthdayDate() {
+        return birthdayDate;
+    }
+
+    public void setBirthdayDate(String birthdayDate) {
+        this.birthdayDate = birthdayDate;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getUserName() {
         return userName;
@@ -32,14 +48,6 @@ public class Child extends BaseObject {
         this.childId = childId;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public String getName() {
         return name;
     }
@@ -54,14 +62,6 @@ public class Child extends BaseObject {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public String getBirthdaydate() {
-        return birthdaydate;
-    }
-
-    public void setBirthdaydate(String birthdaydate) {
-        this.birthdaydate = birthdaydate;
     }
 
     public String getImageUrl() {
