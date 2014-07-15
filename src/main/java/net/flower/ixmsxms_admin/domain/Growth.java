@@ -7,11 +7,27 @@ public class Growth extends BaseObject {
     private Long growthId;
     private Long childId;
     private String growDate;
-    private String height;
-    private String weight;
+    private Long stature;
+    private Long weight;
     private String note;
     private Date regDatetime;
     private Date modDatetime;
+
+    public Long getStature() {
+        return stature;
+    }
+
+    public void setStature(Long stature) {
+        this.stature = stature;
+    }
+
+    public Long getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Long weight) {
+        this.weight = weight;
+    }
 
     public Long getGrowthId() {
         return growthId;
@@ -35,22 +51,6 @@ public class Growth extends BaseObject {
 
     public void setGrowDate(String growDate) {
         this.growDate = growDate;
-    }
-
-    public String getHeight() {
-        return height;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    public String getWeight() {
-        return weight;
-    }
-
-    public void setWeight(String weight) {
-        this.weight = weight;
     }
 
     public String getNote() {
