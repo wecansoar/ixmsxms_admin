@@ -70,7 +70,7 @@
               #{userId}
             , #{name}
             , #{sex}
-            , #{birthdaydate}
+            , #{birthdayDate}
             , #{imageUrl}
             , sysdate()
             , sysdate()
@@ -89,7 +89,7 @@
           user_id = #{userId}
         , name = #{name}
         , sex = #{sex}
-        , birthdayDate = #{birthdaydate}
+        , birthdayDate = #{birthdayDate}
         , image_url = #{imageUrl}
         , mod_datetime = sysdate()
         , status = #{status}

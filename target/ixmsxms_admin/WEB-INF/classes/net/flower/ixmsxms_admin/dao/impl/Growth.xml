@@ -52,7 +52,7 @@
         (
               child_id
             , grow_date
-            , height
+            , stature
             , weight
             , note
             , reg_datetime
@@ -62,7 +62,7 @@
         (
               #{childId}
             , #{growDate}
-            , #{height}
+            , #{stature}
             , #{weight}
             , #{note}
             , sysdate()
@@ -80,7 +80,7 @@
         set
           child_id = #{childId}
         , grow_date = #{growDate}
-        , height = #{height}
+        , stature = #{stature}
         , weight = #{weight}
         , note = #{note}
         , mod_datetime = sysdate()
